@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表过滤</title>
+    <script src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+      <ul>
+          <h3>明星列表</h3>
+          <input type="text" placeholder="请输入" v-model="keyword">
+          <li v-for="(item, index) in filePersons" :key="index">
+            {{item.name}} -- {{item.age}} -- {{item.sex}}
+          </li>
+      </ul>  
+  </div>
+  <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      // watch写法
+      // const vm = new Vue({
+      //     el:'#root',
+      //     data() {
+      //         return {
+      //           keyword: '',
+      //           persons:[
+      //               {id:'01',name:'马冬梅',age:18,sex:'女'},
+      //               {id:'02',name:'周冬雨',age:19,sex:'女'},
+      //               {id:'03',name:'周杰伦',age:20,sex:'男'},
+      //               {id:'03',name:'温兆伦',age:21,sex:'男'},
+      //           ],
+      //           filePersons: []
+      //         }
+      //     },
+      //     watch: {
+      //       keyword: {
+      //         immediate:true, 
+      //         handler(val){
+      //           this.filePersons = this.persons.filter((p)=>{
+      //             return p.name.indexOf(val) !== -1
+      //           })
+      //         }
+      //       }
+      //     }
+      // });
+
+      // computed写法
+      const vm = new Vue({
+          el:'#root',
+          data() {
+              return {
+                keyword: '',
+                persons:[
+                    {id:'01',name:'马冬梅',age:18,sex:'女'},
+                    {id:'02',name:'周冬雨',age:19,sex:'女'},
+                    {id:'03',name:'周杰伦',age:20,sex:'男'},
+                    {id:'03',name:'温兆伦',age:21,sex:'男'},
+                ],
+                // filePersons: []
+              }
+          },
+          computed:{
+            filePersons(){
+              return this.persons.filter((p)=>{
+                  return p.name.indexOf(this.keyword) !== -1
+              })
+            }
+          }
+      });
+  </script>
+</body>
+</html>
