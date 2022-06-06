@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.set()</title>
+    <script src="./vue.js"></script>
+</head>
+<body>
+  <div id="root">
+    <h3>学校名称:{{schoolName}}</h3> 
+    <h3>学校地址:{{address}}</h3> 
+    <hr>
+    <button type="button" @click="addAge">添加</button>
+    <h3>姓名:{{student.name}}</h3> 
+    <h3>性别:{{student.sex}}</h3> 
+    <h3 v-if="student.age">年龄:{{student.age}}</h3> 
+    <h3>朋友们</h3> 
+    <ul>
+      <li v-for="(item, index) in student.friends" :key="index">{{item.name}} --{{item.sex}}</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      const vm = new Vue({
+        el:'#root',
+        data() {
+          return {
+            schoolName:'尚硅谷',
+            address:'北京',
+            student:{
+              name:'张三',
+              // age:'20',
+              sex:'男',
+              friends:[
+                {name:'李四',sex:'男'},
+                {name:'王五',sex:'男'},
+              ]
+            }
+          }
+        },
+        methods:{
+          addAge(){
+            Vue.set(this.student, 'age', 18);
+          }
+        }
+      });
+  </script>
+</body>
+</html>

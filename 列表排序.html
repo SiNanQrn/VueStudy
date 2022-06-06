@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>列表排序</title>
-    <script src="https://cn.vuejs.org/js/vue.js"></script>
+    <script src="./vue.js"></script>
 </head>
 <body>
   <div id="root">
@@ -27,6 +27,7 @@
         el:'#root',
         data() {
           return {
+            keyword:'',
             sortType: '',
             persons:[
                 {id:'01',name:'温兆伦',age:21,sex:'男'},
@@ -42,7 +43,7 @@
                 return p.name.indexOf(this.keyword) !== -1
             })
             if(this.sortType){
-              this.arr.sort((a, b)=>{
+              arr.sort((a, b)=>{
                 return this.sortType === 1 ? b.age - a.age : a.age - b.age;
               })
             }
