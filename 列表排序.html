@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表排序</title>
+    <script src="https://cn.vuejs.org/js/vue.js"></script>
+</head>
+<body>
+  <div id="root">
+      <ul>
+          <h3>明星列表</h3>
+          <input type="text" placeholder="请输入" v-model="keyword">
+          <button type="button" @click="sortType=1">升序排列</button>
+          <button type="button" @click="sortType=2">降序排列</button>
+          <button type="button" @click="sortType=0">原序列</button>
+          <li v-for="(item, index) in filePersons" :key="index">
+            {{item.name}} -- {{item.age}} -- {{item.sex}}
+          </li>
+      </ul>  
+  </div>
+  <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      const vm = new Vue({
+        el:'#root',
+        data() {
+          return {
+            sortType: '',
+            persons:[
+                {id:'01',name:'温兆伦',age:21,sex:'男'},
+                {id:'02',name:'周冬雨',age:19,sex:'女'},
+                {id:'03',name:'马冬梅',age:18,sex:'女'},
+                {id:'04',name:'周杰伦',age:20,sex:'男'},
+            ],
+          }
+        },
+        computed:{
+          filePersons(){
+            const arr =  this.persons.filter((p)=>{
+                return p.name.indexOf(this.keyword) !== -1
+            })
+            if(this.sortType){
+              this.arr.sort((a, b)=>{
+                return this.sortType === 1 ? b.age - a.age : a.age - b.age;
+              })
+            }
+            return arr;
+          }
+        }
+      });
+  </script>
+</body>
+</html>
