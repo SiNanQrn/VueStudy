@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>分析生命周期</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<!--
+  
+-->
+
+<div id="root">
+  <!-- <h3>{{n}}</h3>
+  <button @click="add">点我+1</button> -->
+</div>
+
+<script type="text/javascript">
+  Vue.config.productionTip = false;
+
+  const vm = new Vue({
+    el:'#root',
+    template:`<div>
+      <h3>{{n}}</h3>
+      <button @click="add">点我+1</button>
+      </div>`,
+    data() { 
+      return {
+        n:1,
+      }
+    }, 
+    methods:{
+      add(){
+        this.n++;
+      }
+    },
+    beforeCreate(){
+      console.log('beforeCreate',this);
+      // debugger;
+    },
+    created(){
+      console.log('created',this);
+      // debugger;
+    },
+    beforeMount() {
+      console.log('beforeMount',this);
+      //此时操作Dom元素失效
+      // document.querySelector('h3').innerHTML('哈哈')
+    },
+    mounted() {
+      console.log('mounted',this);
+      //此时操作Dom元素有效,但不建议
+      // document.querySelector('h3').innerText = '哈哈'
+    }
+    
+  })
+  //通过外部的定时器实现(不推荐)
+  // setInterval(() => {
+  //   vm.opacity -= 0.01;
+  //   if(vm.opacity <= 0){
+  //     vm.opacity = 1;
+  //   }
+  // }, 14);
+</script>
+</body>
+</html>
