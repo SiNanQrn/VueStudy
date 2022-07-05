@@ -36,11 +36,11 @@
         this.n++;
       }
     },
-    beforeCreate(){
+    beforeCreate() {
       console.log('beforeCreate',this);
       // debugger;
     },
-    created(){
+    created() {
       console.log('created',this);
       // debugger;
     },
@@ -53,6 +53,14 @@
       console.log('mounted',this);
       //此时操作Dom元素有效,但不建议
       // document.querySelector('h3').innerText = '哈哈'
+    },
+    //此时数据是新的，但页面是旧的，即:页面尚末和数据保持同步。
+    beforeUpdate() {
+      // console.log('beforeUpdate',this.n);
+      // debugger;
+    },
+    updated() {
+      console.log('updated',this);
     }
     
   })
