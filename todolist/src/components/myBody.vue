@@ -5,8 +5,7 @@
       :finishTog='finishTog'
       v-for="(item,index) in todoEven" 
       :key="index" 
-      @func="getTog">
-    </myList>
+      @func="getTog" />
   </div>  
 </template>
 

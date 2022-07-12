@@ -20,7 +20,7 @@ export default {
   methods: {
     inputVal(event){
       if(event.target.value){
-        this.inputValue.push(event.target.value);
+        this.inputValue.unshift(event.target.value);
         eventBus.$emit('inputValue',this.inputValue);
         event.target.value = ""
       }else{

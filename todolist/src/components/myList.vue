@@ -8,10 +8,9 @@
 <script>
 export default {
   name:'myList',
-  props: {
-    inputValue:String,
-    finishTog:Boolean
-  },
+  props: [
+    'inputValue', 'finishTog'
+  ],
   data() {
     return {
       toggle:false
