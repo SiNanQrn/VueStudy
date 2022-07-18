@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>挂载</title>
+    <script src="../vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div>{{msg}}</div>
+      <button @click="add">+1</button>
+    </div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      new Vue({
+        el: "#root",
+        data() {
+          return {
+            msg: 1,
+          };
+        },
+        methods: {
+          add() {
+            this.msg += 1;
+          },
+        },
+        beforeCreate() {
+          console.log("beforeCreate");
+          debugger;
+        },
+        created() {
+          console.log("created");
+          debugger;
+        },
+        beforeMount() {
+          console.log("beforeMount");
+          debugger;
+        },
+        mounted() {
+          console.log("mounted");
+          debugger;
+        },
+        beforeUpdate() {
+          console.log("beforeUpdate");
+          debugger;
+        },
+        updated() {
+          console.log("updated");
+          debugger;
+        },
+        beforeDestroy() {
+          console.log("beforeDestroy");
+          debugger;
+        },
+        destoryed() {
+          console.log("destoryed");
+          debugger;
+        },
+      });
+    </script>
+  </body>
+</html>

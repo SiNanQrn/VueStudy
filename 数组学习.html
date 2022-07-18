@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组学习</title>
+    <script src="./vue.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript">
+      Vue.config.productionTip = false;
+
+      // let myData = "Manchester,London,Liverpool,Birmingham,Leeds,Carlisle";
+      // // 字符串和数组之间的转换
+      // let myArray = myData.split(",");
+      // console.log(myArray);
+
+      // 字符串连接
+      // let myArray = ["a", "b", "c", "d", "e", "false"];
+      // let myNewString = myArray.join(",");
+      // console.log(myNewString, typeof myNewString);
+
+      // 添加数组项 
+
+      // 1.arr.push() 参数可添加一个或多个元素,该元素是添加到数组末尾的
+      let myArray = ["Manchester", "London", "Liverpool", "Carlisle"];
+      // myArray.push("sinan", "xhl");
+      // console.log(myArray);
+
+      // 2.当 arr.push() 方法调用完成时，将返回数组的新长度。
+      // var newLength = myArray.push("Bristol");
+      // console.log(newLength);
+
+      // 删除数组项
+
+      // 1.从数组中删除最后一个元素的话直接使用 pop() 就可以
+      // myArray.pop();
+      // console.log(myArray);
+
+      // 2.当方法调用完成时，将返回已删除的项目。
+      // let removedItem = myArray.pop();
+      // console.log(removedItem);
+
+
+      // unshift() 和 shift() 从功能上与 push() 和 pop() 完全相同，只是它们分别作用于数组的开始，而不是结尾。
+    </script>
+  </body>
+</html>

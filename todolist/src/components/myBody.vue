@@ -1,58 +1,54 @@
 <template>
   <div class="myBody">
-    <myList 
-      :inputValue='item'  
-      :finishTog='finishTog'
-      v-for="(item,index) in todoEven" 
-      :key="index" 
-      @func="getTog" />
-  </div>  
+    <myList
+      :finishTog="finishTog"
+      :inputValue="item"
+      v-for="item in todoEven"
+      :key="item.id"
+      @func="getChecked"
+    />
+  </div>
 </template>
 
 <script>
-import myList from '../components/myList.vue'
-import eventBus from '../../evenBus.js'
+import myList from "../components/myList.vue";
+import eventBus from "../../evenBus.js";
 export default {
-  name:'myBody',
-  data(){
-    return{
+  name: "myBody",
+  data() {
+    return {
       // 代办事项
-      todoEven:'',
+      todoEven: {},
       // 每个事项是否打勾
-      istog:'',
+      check: "",
       // 打勾个数
-      togNum:0,
-      // 
-      finishTog:false
-    }
+      checkedNum: 0,
+      finishTog: false,
+    };
   },
   components: {
-    myList
+    myList,
   },
   methods: {
-    getTog(data){
-      this.istog = data;  
-      this.istog === false ? this.togNum++ : this.togNum--;  
-      eventBus.$emit('toggle',this.togNum);
-      console.log('qrn',this.togNum);
-    }
+    getChecked(o) {
+      this.check = o;
+      this.check === true ? this.checkedNum++ : this.checkedNum--;
+      eventBus.$emit("toggle", this.checkedNum);
+    },
   },
-  mounted(){
-    eventBus.$on('inputValue',(e)=>{
-      this.todoEven = e
+  mounted() {
+    eventBus.$on("inputValue", (e) => {
+      this.todoEven = e;
+      console.log("this.todoEven", this.todoEven);
     });
-    eventBus.$on('finishTog',(o)=>{
-      this.finishTog = o
-      // console.log("this.finishTog", this.finishTog);
-      // if(this.finishTog === false){
-        this.getTog(this.finishTog);
-      // }
-     
-      // this.finishTog === false ? this.istog = false : this.istog = true; 
-
+    eventBus.$on("finishTog", (e) => {
+      this.finishTog = e;
+      // console.log("勾选", e);
+      // this.todoEven.forEach((o) => (o.done = !e));
+      // console.log("this.todoEven", this.todoEven);
     });
   },
-}
+};
 </script>
 
 <style>
@@ -61,6 +57,5 @@ export default {
   /* height: 255px; */
   margin: 0 5px;
   /* background-color:rgb(0, 255, 128); */
-
 }
 </style>

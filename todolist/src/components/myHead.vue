@@ -1,41 +1,52 @@
 <template>
   <div class="myHead">
-    <input 
-      type="text" 
+    <input
+      type="text"
       placeholder=" 请输入你的任务名称,按回车确认"
-      @keyup.enter="inputVal"
-    >
-  </div>  
+      @keyup.enter="add"
+    />
+  </div>
 </template>
 
 <script>
-import eventBus from '../../evenBus.js'
+import { nanoid } from "nanoid";
+import eventBus from "../../evenBus.js";
 export default {
-  name:'myHead',
-  data(){
-    return{
-      inputValue:[]
-    }
+  name: "myHead",
+  data() {
+    return {
+      inputValue: [],
+    };
   },
   methods: {
-    inputVal(event){
-      if(event.target.value){
-        this.inputValue.unshift(event.target.value);
-        eventBus.$emit('inputValue',this.inputValue);
-        event.target.value = ""
-      }else{
+    add(event) {
+      if (event.target.value) {
+        const todoObj = {
+          id: nanoid(),
+          title: event.target.value,
+          done: false,
+        };
+        this.inputValue.unshift(todoObj);
+
+        eventBus.$emit("inputValue", this.inputValue);
+        event.target.value = "";
+      } else {
         alert("不许输入空值！");
       }
-     
-    }
-  }
-}
+    },
+  },
+  mounted() {
+    eventBus.$on("inputValue", (e) => {
+      this.inputValue = e;
+      // console.log("e", e);
+    });
+  },
+};
 </script>
 
 <style>
 .myHead {
   height: 45px;
-  /* background-color:red; */
 }
 input {
   width: 330px;

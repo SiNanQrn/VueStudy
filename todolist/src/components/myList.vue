@@ -1,28 +1,47 @@
 <template>
   <div class="myList">
-    <input type="checkbox" id="cbox1" v-model="toggle" @click="sendTog">
-    <label for="cbox1">{{inputValue}}</label>
-  </div>  
+    <input
+      type="checkbox"
+      id="cbox1"
+      :toggle="checked"
+      @change="handleCheck(inputValue)"
+    />
+    <label for="cbox1">{{ inputValue.title }}</label>
+  </div>
 </template>
 
 <script>
 export default {
-  name:'myList',
-  props: [
-    'inputValue', 'finishTog'
-  ],
+  name: "myList",
+  props: ["inputValue", "finishTog"],
   data() {
     return {
-      toggle:false
-    }
+      todo: {},
+      checked: false,
+    };
   },
-  methods: { 
-    sendTog(){
-      // this.finishTog == true ? this.toggle = true : this.toggle = false;
-      this.$emit('func',this.toggle);
-    }
-  }
-}
+  methods: {
+    handleCheck(o) {
+      o.done = !o.done;
+      this.$emit("func", o.done);
+    },
+    // sendTog() {
+    //   // this.finishTog == true ? this.toggle = true : this.toggle = false;
+    //   this.$emit("func", this.toggle);
+    // },
+  },
+  mounted() {
+    // this.checked = !this.finishTog;
+    this.checked = true;
+    // this.todo = this.inputValue;
+    // console.log("this.todo", this.todo);
+    // console.log("this.finishTog", this.finishTog);
+  },
+  updated() {
+    // this.todo.done = !this.finishTog;
+    // console.log("this.todo", this.todo);
+  },
+};
 </script>
 
 <style scoped>
@@ -30,6 +49,9 @@ export default {
   height: 40px;
   line-height: 40px;
   border: 1px solid #ddd;
+}
+.myList:hover {
+  background-color: rgba(162, 180, 190, 0.407);
 }
 input {
   width: 15px;
