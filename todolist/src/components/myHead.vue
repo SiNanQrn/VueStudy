@@ -2,7 +2,7 @@
   <div class="myHead">
     <input
       type="text"
-      placeholder=" 请输入你的任务名称,按回车确认"
+      placeholder="请输入你的任务名称,按回车确认"
       @keyup.enter="add"
     />
   </div>
@@ -27,7 +27,6 @@ export default {
           done: false,
         };
         this.inputValue.unshift(todoObj);
-
         eventBus.$emit("inputValue", this.inputValue);
         event.target.value = "";
       } else {
@@ -38,7 +37,6 @@ export default {
   mounted() {
     eventBus.$on("inputValue", (e) => {
       this.inputValue = e;
-      // console.log("e", e);
     });
   },
 };

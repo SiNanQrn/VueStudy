@@ -2,8 +2,8 @@
   <div class="myBottom">
     <div class="right">
       <input
-        type="checkbox"
         id="finish"
+        type="checkbox"
         v-model="finishTog"
         @click="allFinish"
       />
@@ -25,6 +25,7 @@ export default {
       finishedNum: 0,
       allNum: 0,
       finishTog: false,
+      count: 0,
     };
   },
   methods: {
@@ -32,11 +33,14 @@ export default {
       let newArr = this.todoList.filter((o) => {
         return !o.done;
       });
-      // this.todoList.splice(0, this.todoList.length);
+      console.log("count", this.count);
       // 置0
       this.finishedNum = 0;
+      this.finishTog = false;
       // 将筛选过的数组共享给其他组件
       eventBus.$emit("inputValue", newArr);
+      // 将删除已完成个数共享给其他组件
+      eventBus.$emit("count", this.finishedNum);
     },
     allFinish() {
       eventBus.$emit("finishTog", this.finishTog);

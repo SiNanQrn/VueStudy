@@ -1,7 +1,6 @@
 <template>
   <div class="myBody">
     <myList
-      :finishTog="finishTog"
       :inputValue="item"
       v-for="item in todoEven"
       :key="item.id"
@@ -23,7 +22,6 @@ export default {
       check: "",
       // 打勾个数
       checkedNum: 0,
-      finishTog: false,
     };
   },
   components: {
@@ -39,13 +37,13 @@ export default {
   mounted() {
     eventBus.$on("inputValue", (e) => {
       this.todoEven = e;
-      console.log("this.todoEven", this.todoEven);
     });
     eventBus.$on("finishTog", (e) => {
-      this.finishTog = e;
-      // console.log("勾选", e);
-      // this.todoEven.forEach((o) => (o.done = !e));
-      // console.log("this.todoEven", this.todoEven);
+      this.todoEven.forEach((o) => (o.done = !e));
+      console.log("this.todoEven", this.todoEven);
+    });
+    eventBus.$on("count", (e) => {
+      this.checkedNum = e;
     });
   },
 };
@@ -54,8 +52,6 @@ export default {
 <style>
 .myBody {
   width: 340px;
-  /* height: 255px; */
   margin: 0 5px;
-  /* background-color:rgb(0, 255, 128); */
 }
 </style>

@@ -2,11 +2,11 @@
   <div class="myList">
     <input
       type="checkbox"
-      id="cbox1"
-      :toggle="checked"
+      id="cbox"
+      :checked="inputValue.done"
       @change="handleCheck(inputValue)"
     />
-    <label for="cbox1">{{ inputValue.title }}</label>
+    <label for="cbox">{{ inputValue.title }}</label>
   </div>
 </template>
 
@@ -25,21 +25,6 @@ export default {
       o.done = !o.done;
       this.$emit("func", o.done);
     },
-    // sendTog() {
-    //   // this.finishTog == true ? this.toggle = true : this.toggle = false;
-    //   this.$emit("func", this.toggle);
-    // },
-  },
-  mounted() {
-    // this.checked = !this.finishTog;
-    this.checked = true;
-    // this.todo = this.inputValue;
-    // console.log("this.todo", this.todo);
-    // console.log("this.finishTog", this.finishTog);
-  },
-  updated() {
-    // this.todo.done = !this.finishTog;
-    // console.log("this.todo", this.todo);
   },
 };
 </script>
