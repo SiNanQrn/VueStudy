@@ -40,7 +40,6 @@ export default {
     });
     eventBus.$on("finishTog", (e) => {
       this.todoEven.forEach((o) => (o.done = !e));
-      console.log("this.todoEven", this.todoEven);
     });
     eventBus.$on("count", (e) => {
       this.checkedNum = e;

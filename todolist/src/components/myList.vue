@@ -1,12 +1,15 @@
 <template>
   <div class="myList">
-    <input
-      type="checkbox"
-      id="cbox"
-      :checked="inputValue.done"
-      @change="handleCheck(inputValue)"
-    />
-    <label for="cbox">{{ inputValue.title }}</label>
+    <div>
+      <input
+        type="checkbox"
+        id="cbox"
+        :checked="inputValue.done"
+        @change="handleCheck(inputValue)"
+      />
+      <label for="cbox">{{ inputValue.title }}</label>
+    </div>
+    <button @click="deleteTask">删除</button>
   </div>
 </template>
 
@@ -25,6 +28,9 @@ export default {
       o.done = !o.done;
       this.$emit("func", o.done);
     },
+    deleteTask() {
+    //  this.$emit("func", o.done);
+    },
   },
 };
 </script>
@@ -34,6 +40,8 @@ export default {
   height: 40px;
   line-height: 40px;
   border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
 }
 .myList:hover {
   background-color: rgba(162, 180, 190, 0.407);
@@ -44,5 +52,11 @@ input {
 }
 label {
   font-size: 15px;
+}
+button {
+  width: 50px;
+  height: 25px;
+  margin-top: 7px;
+  /* background-color: brown; */
 }
 </style>
