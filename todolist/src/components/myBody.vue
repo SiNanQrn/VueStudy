@@ -2,9 +2,10 @@
   <div class="myBody">
     <myList
       :inputValue="item"
-      v-for="item in todoEven"
+      v-for="(item, index) in todoEven"
       :key="item.id"
       @func="getChecked"
+      @delete="() => getDelId(index)"
     />
   </div>
 </template>
@@ -33,6 +34,10 @@ export default {
       this.check === true ? this.checkedNum++ : this.checkedNum--;
       eventBus.$emit("toggle", this.checkedNum);
     },
+    getDelId(i){
+      this.todoEven.splice(i, 1);
+      eventBus.$emit("inputValue", this.todoEven);
+    }
   },
   mounted() {
     eventBus.$on("inputValue", (e) => {

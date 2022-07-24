@@ -9,7 +9,7 @@
       />
       <label for="cbox">{{ inputValue.title }}</label>
     </div>
-    <button @click="deleteTask">删除</button>
+    <button @click="deleteTask(inputValue.id)">删除</button>
   </div>
 </template>
 
@@ -28,8 +28,9 @@ export default {
       o.done = !o.done;
       this.$emit("func", o.done);
     },
-    deleteTask() {
-    //  this.$emit("func", o.done);
+    deleteTask(e) {
+      console.log('e',e);
+     this.$emit("delete", e);
     },
   },
 };
