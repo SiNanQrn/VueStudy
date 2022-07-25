@@ -1,17 +1,29 @@
 <template>
   <div class="myList">
-    <div>
+    <div class="left">
       <input
+        class="checkInput"
         type="checkbox"
         id="cbox"
         :checked="inputValue.done"
         @change="handleCheck(inputValue)"
       />
-      <label for="cbox">{{ inputValue.title }}</label>
+      <label v-show="!todo.isEdit" for="cbox">{{ inputValue.title }}</label>
+      <input
+        type="text"
+        v-show="todo.isEdit"
+        :value="inputValue.title"
+        @blur="handleBlur(e)"
+      />
     </div>
+
     <div>
-      <button @click="editTask(inputValue.id)">编辑</button>
-      <button class="btn btn-danger" @click="deleteTask(inputValue.id)">删除</button>
+      <button class="btn btn-edit" @click="editTask(inputValue.id)">
+        编辑
+      </button>
+      <button class="btn btn-danger" @click="deleteTask(inputValue.id)">
+        删除
+      </button>
     </div>
   </div>
 </template>
@@ -32,12 +44,18 @@ export default {
       this.$emit("func", o.done);
     },
     deleteTask(e) {
-      console.log('e',e);
-     this.$emit("delete", e);
+      console.log("e", e);
+      this.$emit("delete", e);
     },
-    editTask(){
-      
-    }
+    editTask() {
+      this.todo = this.inputValue;
+      this.todo.isEdit = true;
+      console.log("inputValue", this.todo);
+    },
+    handleBlur(e) {
+      this.todo.isEdit = false;
+      console.log(e);
+    },
   },
 };
 </script>
@@ -53,7 +71,10 @@ export default {
 .myList:hover {
   background-color: rgba(162, 180, 190, 0.407);
 }
-input {
+.left {
+  width: 230px;
+}
+.checkInput {
   width: 15px;
   height: 15px;
 }
@@ -66,9 +87,15 @@ button {
   margin-top: 7px;
   /* background-color: brown; */
 }
-.btn-danger{
-  color:rgb(243, 243, 243);
-  background-color:#da4f49;
+.btn-edit {
+  margin-right: 5px;
+  color: rgb(243, 243, 243);
+  background-color: #77adef;
+  border: 1px solid #4499e8;
+}
+.btn-danger {
+  color: rgb(243, 243, 243);
+  background-color: #da4f49;
   border: 1px solid #bd3d2f;
 }
 </style>
