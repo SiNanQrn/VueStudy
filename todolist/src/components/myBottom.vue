@@ -60,6 +60,14 @@ export default {
       }
     });
   },
+  watch:{
+    todoList:{
+      deep: true,
+      handler(val){
+        localStorage.setItem('todoList',JSON.stringify(val));
+      }
+    }
+  }
 };
 </script>
 

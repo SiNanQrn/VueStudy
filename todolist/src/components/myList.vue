@@ -13,7 +13,8 @@
         type="text"
         v-show="todo.isEdit"
         :value="inputValue.title"
-        @blur="handleBlur(e)"
+        @blur="handleBlur($event)"
+        ref="inputTitle"
       />
     </div>
 
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import { nextTick } from 'vue';
 export default {
   name: "myList",
   props: ["inputValue", "finishTog"],
@@ -39,22 +41,33 @@ export default {
     };
   },
   methods: {
+    // 打勾
     handleCheck(o) {
       o.done = !o.done;
       this.$emit("func", o.done);
     },
+    // 删除
     deleteTask(e) {
-      console.log("e", e);
       this.$emit("delete", e);
     },
+    // 编辑
     editTask() {
       this.todo = this.inputValue;
       this.todo.isEdit = true;
-      console.log("inputValue", this.todo);
+      nextTick(()=>{
+        this.$refs.inputTitle.focus();
+      })
+      console.log("inputValue", this.todo.isEdit);
     },
+    // 失焦
     handleBlur(e) {
       this.todo.isEdit = false;
-      console.log(e);
+      // 校验
+      if(e.target.value == ''){
+        alert('不得输入空值！');
+        return;
+      }
+      this.$emit("updateVal", this.todo.id, e.target.value);
     },
   },
 };

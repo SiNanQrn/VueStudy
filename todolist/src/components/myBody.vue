@@ -6,6 +6,7 @@
       :key="item.id"
       @func="getChecked"
       @delete="() => getDelId(index)"
+      @updateVal="updateVal"
     />
   </div>
 </template>
@@ -37,6 +38,13 @@ export default {
     getDelId(i){
       this.todoEven.splice(i, 1);
       eventBus.$emit("inputValue", this.todoEven);
+    },
+    updateVal(id,newTitle){
+      this.todoEven.forEach((e)=>{
+        if(e.id === id){
+          e.title = newTitle;
+        }
+      })
     }
   },
   mounted() {
@@ -50,14 +58,6 @@ export default {
       this.checkedNum = e;
     });
   },
-  watch:{
-    todoEven:{
-      deep: true,
-      handler(val){
-        localStorage.setItem('todoEven',JSON.stringify(val));
-      }
-    }
-  }
 };
 </script>
 
