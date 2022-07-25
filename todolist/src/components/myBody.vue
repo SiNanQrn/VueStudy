@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       // 代办事项
-      todoEven: {},
+      todoEven: JSON.parse(localStorage.getItem('inputValue'))|| [],
       // 每个事项是否打勾
       check: "",
       // 打勾个数
@@ -50,6 +50,14 @@ export default {
       this.checkedNum = e;
     });
   },
+  watch:{
+    todoEven:{
+      deep: true,
+      handler(val){
+        localStorage.setItem('todoEven',JSON.stringify(val));
+      }
+    }
+  }
 };
 </script>
 

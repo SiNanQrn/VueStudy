@@ -9,7 +9,10 @@
       />
       <label for="cbox">{{ inputValue.title }}</label>
     </div>
-    <button @click="deleteTask(inputValue.id)">删除</button>
+    <div>
+      <button @click="editTask(inputValue.id)">编辑</button>
+      <button class="btn btn-danger" @click="deleteTask(inputValue.id)">删除</button>
+    </div>
   </div>
 </template>
 
@@ -32,6 +35,9 @@ export default {
       console.log('e',e);
      this.$emit("delete", e);
     },
+    editTask(){
+      
+    }
   },
 };
 </script>
@@ -59,5 +65,10 @@ button {
   height: 25px;
   margin-top: 7px;
   /* background-color: brown; */
+}
+.btn-danger{
+  color:rgb(243, 243, 243);
+  background-color:#da4f49;
+  border: 1px solid #bd3d2f;
 }
 </style>

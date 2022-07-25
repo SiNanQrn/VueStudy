@@ -15,7 +15,7 @@ export default {
   name: "myHead",
   data() {
     return {
-      inputValue: [],
+      inputValue: JSON.parse(localStorage.getItem('inputValue'))||[],
     };
   },
   methods: {
@@ -25,6 +25,7 @@ export default {
           id: nanoid(),
           title: event.target.value,
           done: false,
+          edit: false
         };
         this.inputValue.unshift(todoObj);
         eventBus.$emit("inputValue", this.inputValue);
@@ -39,6 +40,15 @@ export default {
       this.inputValue = e;
     });
   },
+  // 深度监视
+  watch:{
+    inputValue:{
+      deep: true,
+      handler(val){
+        localStorage.setItem('inputValue',JSON.stringify(val));
+      }
+    }
+  }
 };
 </script>
 

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sessionStorage</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="root">
+  <button @click="saveData()">保存数据</button>
+  <button @click="readData()">读取数据</button>
+  <button @click="removeData()">删除数据</button>
+  <button @click="clearData()">清空数据</button>
+</div>
+<script type="text/javascript">
+  Vue.config.productionTip = false;
+  new Vue({
+    el:'#root',
+    data() { 
+      return {
+        person:{
+          name:'思南',
+          age: 20,
+        }
+         
+      }
+    },  
+    methods:{
+      // 保存数据
+      saveData(){
+        sessionStorage.setItem('msg','2022/07/24 阿里 学习');
+        sessionStorage.setItem('num','123456');
+        sessionStorage.setItem('person',JSON.stringify(this.person));
+      },
+      // 读取数据
+      readData(){
+        console.log(sessionStorage.getItem('msg'));
+        console.log(sessionStorage.getItem('num'));
+       const result = sessionStorage.getItem('person');
+       console.log(JSON.parse(result));
+      },
+      // 移除数据
+      removeData(){
+       sessionStorage.removeItem('msg');
+       sessionStorage.removeItem('person');
+      },
+      // 清空数据
+      clearData(){
+       sessionStorage.clear();
+      }
+
+    } 
+  });
+</script>
+</body>
+</html>

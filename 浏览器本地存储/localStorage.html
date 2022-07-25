@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<!-- 
+  webStorage
+    1.存储内容太小一般支持5MB左右(不同浏览器可能还不一样)
+    ⒉.浏览器端通过Window.sessionStorage和Window.localStorage属性来实现本地存储机制。
+    3.相关API:
+      1. xxxxxStorage.setItem("key", "value");
+      该方法接受一个键和值作为参数，会把键值对添加到存储中，如果键名存在，则更新其对应的值。
+      2. xxxxxStorage.getItem("person");
+      该方法接受一个键名作为参数，返回键名对应的值。
+      3. xxxxxStorage.removeItem("key");
+      该方法接受一个键名作为参数，并把该键名从存储中删除。
+      4. xxxxxStorage.clear()
+      该方法会清空存储中的所有数据。
+    4.备注:
+    1.SessionStorage存储的内容会随着浏览器窗口关闭而消失。
+    2.LocalStorage存储的内容，需要手动清除才会消失。
+    3.xxxxxStorage.getItem(xxx)如果xxx对应的value获取不到，那么getltem的返回值是null,
+    4.JSON.parse(null)的结果依然是null。
+
+--> 
+<div id="root">
+  <button @click="saveData()">保存数据</button>
+  <button @click="readData()">读取数据</button>
+  <button @click="removeData()">删除数据</button>
+  <button @click="clearData()">清空数据</button>
+</div>
+<script type="text/javascript">
+  Vue.config.productionTip = false;
+  new Vue({
+    el:'#root',
+    data() { 
+      return {
+        person:{
+          name:'思南',
+          age: 20,
+        }
+         
+      }
+    },  
+    methods:{
+      // 保存数据
+      saveData(){
+        localStorage.setItem('msg','2022/07/24 阿里 学习');
+        localStorage.setItem('num','123456');
+        localStorage.setItem('person',JSON.stringify(this.person));
+      },
+      // 读取数据
+      readData(){
+        console.log(localStorage.getItem('msg'));
+        console.log(localStorage.getItem('num'));
+       const result = localStorage.getItem('person');
+       console.log(JSON.parse(result));
+      },
+      // 移除数据
+      removeData(){
+       localStorage.removeItem('msg');
+       localStorage.removeItem('person');
+      },
+      // 清空数据
+      clearData(){
+       localStorage.clear();
+      }
+
+    } 
+  });
+</script>
+</body>
+</html>
